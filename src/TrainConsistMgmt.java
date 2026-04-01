@@ -1,73 +1,69 @@
+
+
 /**
  * MAIN CLASS: TrainConsistMgmt
- * Use Case 7: Sort Bogies by Capacity (Comparator)
+ * Use Case 8: Filter Passenger Bogies Using Streams
  *
  * Description:
- * This class demonstrates sorting of passenger bogies
- * using Comparator based on seating capacity.
- * author Shivam puri
+ * Demonstrates filtering bogies using Java Stream API
+ * based on seating capacity conditions.
+ * AUTHOR shivam puri
  */
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-
+// ----- BOGIE CLASS -----
 class Bogie {
     String name;
     int capacity;
-
 
     public Bogie(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
     }
 
-
     public void display() {
         System.out.println("Bogie: " + name + " | Capacity: " + capacity);
     }
 }
 
+// ----- MAIN CLASS -----
 public class TrainConsistMgmt {
 
     public static void main(String[] args) {
 
         System.out.println("===============================================");
-        System.out.println("UC7 - Sort Bogies by Capacity (Comparator)");
+        System.out.println("UC8 - Filter Passenger Bogies (Stream API)");
         System.out.println("===============================================\n");
 
-
+        // ----- CREATE LIST (Same as UC7) -----
         List<Bogie> bogieList = new ArrayList<>();
-
 
         bogieList.add(new Bogie("Sleeper", 72));
         bogieList.add(new Bogie("AC Chair", 60));
         bogieList.add(new Bogie("First Class", 24));
+        bogieList.add(new Bogie("Luxury Coach", 80)); // extra example
 
+        // ----- DISPLAY ORIGINAL LIST -----
+        System.out.println("Original Bogie List:\n");
+        bogieList.forEach(Bogie::display);
 
-        System.out.println("Before Sorting:\n");
-        for (Bogie b : bogieList) {
-            b.display();
+        // ----- FILTER USING STREAM -----
+        List<Bogie> filteredBogies = bogieList.stream()
+                .filter(b -> b.capacity > 60)   // CONDITION
+                .collect(Collectors.toList()); // COLLECT RESULT
+
+        // ----- DISPLAY FILTERED LIST -----
+        System.out.println("\nFiltered Bogies (Capacity > 60):\n");
+
+        if (filteredBogies.isEmpty()) {
+            System.out.println("No bogies match the criteria.");
+        } else {
+            filteredBogies.forEach(Bogie::display);
         }
 
-
-        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
-
-
-        System.out.println("\nAfter Sorting (By Capacity - Ascending):\n");
-        for (Bogie b : bogieList) {
-            b.display();
-        }
-
-
-        bogieList.sort(Comparator.comparingInt((Bogie b) -> b.capacity).reversed());
-
-        System.out.println("\nAfter Sorting (By Capacity - Descending):\n");
-        for (Bogie b : bogieList) {
-            b.display();
-        }
-
-        System.out.println("\nUC7 sorting completed...");
+        System.out.println("\nUC8 filtering completed...");
     }
 }
