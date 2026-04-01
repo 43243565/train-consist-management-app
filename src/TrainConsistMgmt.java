@@ -7,7 +7,7 @@
  * Description:
  * Demonstrates filtering bogies using Java Stream API
  * based on seating capacity conditions.
- * AUTHOR shivam puri
+ * AUTHOR Shivam puri
  */
 
 import java.util.ArrayList;
