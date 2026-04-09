@@ -1,24 +1,29 @@
 /**
  * MAIN CLASS: TrainConsistMgmt
- * Use Case 17: Sort Bogie Names using Arrays.sort()
- *author shivam
+ * Use Case 18: Linear Search for Bogie ID
  */
-
-import java.util.Arrays;
 
 // ----- MAIN CLASS -----
 public class TrainConsistMgmt {
 
     public static void main(String[] args) {
 
-        String[] bogies = {
-                "Sleeper", "AC Chair", "First Class", "General", "Luxury"
-        };
+        String[] ids = {"BG101", "BG205", "BG309", "BG412", "BG550"};
 
-        Arrays.sort(bogies);
+        String search = "BG309";
+        boolean found = false;
 
-        for (String b : bogies) {
-            System.out.println(b);
+        for (String id : ids) {
+            if (id.equals(search)) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("Found ✔️");
+        } else {
+            System.out.println("Not Found ❌");
         }
     }
 }
